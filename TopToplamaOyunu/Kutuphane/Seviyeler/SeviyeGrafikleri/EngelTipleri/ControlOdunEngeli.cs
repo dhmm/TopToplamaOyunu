@@ -1,0 +1,42 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace TopToplamaOyunu.Kutuphane.Seviyeler.SeviyeGrafikleri.EngelTipleri
+{
+    public partial class ControlOdunEngeli : UserControl
+    {
+        public ControlOdunEngeli()
+        {
+            InitializeComponent();
+        }
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            base.OnPaintBackground(e);
+            Graphics g = e.Graphics;
+
+            if (Parent != null)
+            {
+                int index = Parent.Controls.GetChildIndex(this);
+                for (int i = Parent.Controls.Count - 1; i > index; i--)
+                {
+                    Control c = Parent.Controls[i];
+                    if (c.Bounds.IntersectsWith(Bounds) && c.Visible)
+                    {
+                        Bitmap bmp = new Bitmap(c.Width, c.Height, g);
+                        c.DrawToBitmap(bmp, c.ClientRectangle);
+                        g.TranslateTransform(c.Left - Left, c.Top - Top);
+                        g.DrawImageUnscaled(bmp, Point.Empty);
+                        g.TranslateTransform(Left - c.Left, Top - c.Top);
+                        bmp.Dispose();
+                    }
+                }
+            }
+        }
+    }
+}
