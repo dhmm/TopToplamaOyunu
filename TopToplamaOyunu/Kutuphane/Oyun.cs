@@ -58,7 +58,7 @@ namespace TopToplamaOyunu.Kutuphane
         public IOyunNesnesi Sepet { set; get; }
 
         private int TOPTA_ALINAN_SKOR = 10;
-        private int SEVIYE_ATLAMA_SKORU = 10;
+        private int SEVIYE_ATLAMA_SKORU = 50;
         private int _skor = 0;
         private int _seviye = 0;
         private int _can = 0;
